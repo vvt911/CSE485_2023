@@ -77,7 +77,7 @@
                 die('Lỗi! Không kết nối được tới Server');
             }
 
-            $sql = "SELECT tieude, hinhanh FROM baiviet";
+            $sql = "SELECT * FROM baiviet";
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -85,11 +85,11 @@
             ?>
                     <div class="col-sm-4 col-md-3 col-lg-2">
                         <div class="card mb-2" style="width: 100%;">
-                            <img src="./images/songs/csmt.jpg" class="card-img-top" alt="...">
+                            <img src="./images/songs/<?= $row['hinhanh'] ?>" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title text-center">
-                                    <a href="detail.php" class="text-decoration-none">
-                                        <?= $row['tieude']; ?>
+                                    <a href="./detail.php?id=<?= $row['ma_bviet']; ?>" class="text-decoration-none">
+                                        <?= $row['ten_bhat']; ?>
                                     </a>
                                 </h5>
                             </div>
