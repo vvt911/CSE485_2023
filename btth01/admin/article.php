@@ -82,7 +82,7 @@
                                         <a href="edit_article.php?id=<?php echo $row["ma_bviet"] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                                     </td>
                                     <td>
-                                        <a href=""><i class="fa-solid fa-trash"></i></a>
+                                        <a href="process_remove_article.php?id=<?php echo $row["ma_bviet"] ?>"><i class="fa-solid fa-trash"></i></a>
                                     </td>
                                 </tr>
                             </tbody>
