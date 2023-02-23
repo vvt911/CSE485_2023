@@ -48,7 +48,7 @@ if ($hinhanh == "") {
         die();
     }
 
-    // Thêm bài viết vào database
+    // Sửa bài viết trong database
     $sql = "UPDATE baiviet SET tieude = '$tieude', ten_bhat = '$ten_bhat', ma_tloai = '$ma_tloai', tomtat = '$tomtat', noidung = '$noidung', ma_tgia = '$ma_tgia', ngayviet = '$ngayviet', hinhanh = '$hinhanh'
     WHERE ma_bviet = '$ma_bviet'";
     $result = mysqli_query($con, $sql);
