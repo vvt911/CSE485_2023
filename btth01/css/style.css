@@ -29,3 +29,11 @@ body{
     overflow-y: hidden;
 }
 
+.container-fluid{
+    height: 100px;
+}
+
+.img-fluid{
+    max-width: 80%;
+    height: auto;
+}

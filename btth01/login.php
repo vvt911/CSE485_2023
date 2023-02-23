@@ -37,7 +37,6 @@
                 </div>
             </div>
         </nav>
-
     </header>
     <main class="container mt-5 mb-5">
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
@@ -73,7 +72,8 @@
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-center ">
-                            Don't have an account?<a href="#" class="text-warning text-decoration-none">Sign Up</a>
+                            Don't have an account?
+                            <a href="#" class="text-warning text-decoration-none">Sign Up</a>
                         </div>
                         <div class="d-flex justify-content-center">
                             <a href="#" class="text-warning text-decoration-none">Forgot your password?</a>
