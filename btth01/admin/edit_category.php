@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music for Life</title>
+    <title> Sửa thể loại</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style_login.css">
@@ -42,27 +42,48 @@
         </nav>
 
     </header>
+    
     <main class="container mt-5 mb-5">
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Sửa thông tin thể loại</h3>
-                <form action="process_add_category.php" method="post">
-                <div class="input-group mt-3 mb-3">
+                    <form action="process_edit_category.php" method="post">
+                        <?php
+                        $con = mysqli_connect('localhost','root','','btth01_cse485' );
+                        if (isset($_GET['id'])) {
+                            $id_tloai = intval($_GET['id']);
+                        } else {
+                            header('Location: category.php');
+                            exit();
+                        }
+                        $sql = "SELECT * from theloai WHERE theloai.ma_tloai = $id_tloai";
+                        $rs = mysqli_query($con,$sql);
+                        $category = mysqli_fetch_assoc($rs);
+                        ?>
+                        <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatId">Mã thể loại</span>
-                        <input type="text" class="form-control" name="txtCatId" readonly value="1">
-                    </div>
+                        <input type="text" class="form-control" name="txtCatId" readonly value="<?php echo $category['ma_tloai']; ?>" readonly>
+                        </div>
 
-                    <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblCatName">Tên thể loại</span>
-                        <input type="text" class="form-control" name="txtCatName" value = "Nhạc trữ tình">
-                    </div>
+                        <div class="input-group mt-3 mb-3">
+                            <span class="input-group-text" id="lblCatName">Tên thể loại</span>
+                            <input type="text" class="form-control" name="txtCatName" value = "<?php echo $category['ten_tloai']; ?>">
+                        </div>
 
-                    <div class="form-group  float-end ">
-                        <input type="submit" value="Lưu lại" class="btn btn-success">
-                        <a href="category.php" class="btn btn-warning ">Quay lại</a>
-                    </div>
-                </form>
+                        <div class="form-group  float-end ">
+                            <input type="submit" value="Lưu lại" class="btn btn-success">
+                            <a href="category.php" class="btn btn-warning ">Quay lại</a>
+                        </div>
+                            
+                    </form>
+                    
+                        
+
+
+
+            
+                
             </div>
         </div>
     </main>
@@ -70,5 +91,17 @@
         <h4 class="text-center text-uppercase fw-bold">TLU's music garden</h4>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (event)=>{
+            event.preventDefault();
+            var tenTheLoai = document.querySelector('input[name="txtCatName"]');
+            if (tenTheLoai.value.trim() === '') {
+                    alert('Bạn chưa nhập Tên thể loại');
+                    return;
+                }
+        form.submit();
+        });
+    </script>
 </body>
 </html>
