@@ -77,33 +77,6 @@ INSERT INTO `baiviet` (`ma_bviet`, `tieude`, `ten_bhat`, `ma_tloai`, `tomtat`, `
 (12, 'Cây và gió', 'Cây và gió', 7, 'Em và anh, hai đứa quen nhau thật tình cờ. Lời hát của anh từ bài hát “Cây và gió” đã làm tâm hồn em xao động. Nhưng sự thật phũ phàng rằng em chưa bao giờ nói cho anh biết những suy nghĩ tận sâu trong tim mình. Bởi vì em nhút nhát, em không dám đối mặt với thực tế khắc nghiệt, hay thực ra em không dám đối diện với chính mình.', NULL, 7, '2013-12-05 00:00:00', NULL),
 (13, 'Như một cách tạ ơn đời', 'Người thầy', 2, 'Ánh nắng cuối ngày rồi cũng sẽ tắt, dòng sông con đò rồi cũng sẽ rẽ sang một hướng khác. Nhưng việc trồng người luôn cảm thụ với chuyến đò ngang, cứ tần tảo đưa rồi lặng lẽ quay về đưa sang. Con đò năm xưa của Thầy nặng trĩu yêu thương, hy sinh thầm lặng.', NULL, 8, '2014-01-02 00:00:00', NULL);
 
---
--- Triggers `baiviet`
---
-DELIMITER $$
-CREATE TRIGGER `tg_SuaBaiViet` AFTER UPDATE ON `baiviet` FOR EACH ROW BEGIN
-		UPDATE theloai
-    	SET SLBaiViet = (SELECT COUNT(*) FROM baiviet WHERE ma_tloai = NEW.ma_tloai)
-    	WHERE ma_tloai = NEW.ma_tloai;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `tg_ThemHBaiViet` AFTER INSERT ON `baiviet` FOR EACH ROW BEGIN
-		UPDATE theloai
-    	SET SLBaiViet = (SELECT COUNT(*) FROM baiviet WHERE ma_tloai = NEW.ma_tloai)
-    	WHERE ma_tloai = NEW.ma_tloai;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `tg_XoaBaiViet` AFTER DELETE ON `baiviet` FOR EACH ROW BEGIN
-		UPDATE theloai
-        SET SLBaiViet = (SELECT COUNT(*) FROM baiviet WHERE ma_tloai = OLD.ma_tloai)
-        WHERE ma_tloai = OLD.ma_tloai;
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -246,3 +219,31 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Triggers `baiviet`
+--
+DELIMITER $$
+CREATE TRIGGER `tg_SuaBaiViet` AFTER UPDATE ON `baiviet` FOR EACH ROW BEGIN
+		UPDATE theloai
+    	SET SLBaiViet = (SELECT COUNT(*) FROM baiviet WHERE ma_tloai = NEW.ma_tloai)
+    	WHERE ma_tloai = NEW.ma_tloai;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `tg_ThemHBaiViet` AFTER INSERT ON `baiviet` FOR EACH ROW BEGIN
+		UPDATE theloai
+    	SET SLBaiViet = (SELECT COUNT(*) FROM baiviet WHERE ma_tloai = NEW.ma_tloai)
+    	WHERE ma_tloai = NEW.ma_tloai;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `tg_XoaBaiViet` AFTER DELETE ON `baiviet` FOR EACH ROW BEGIN
+		UPDATE theloai
+        SET SLBaiViet = (SELECT COUNT(*) FROM baiviet WHERE ma_tloai = OLD.ma_tloai)
+        WHERE ma_tloai = OLD.ma_tloai;
+END
+$$
+DELIMITER ;
