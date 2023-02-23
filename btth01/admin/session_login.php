@@ -1,6 +1,16 @@
 <?php
     session_start();
-    if(!isset($_SESSION['KeyLogin'])) {
-        header("Location: ../login.php");
+    $message = "Vui long dang nhap";
+    if(isset($_SESSION['LAST_ACTIVITY'])) {
+        if(time() - $_SESSION['LAST_ACTIVITY'] > 30) {
+            session_unset();
+            session_destroy();
+            header("Location: ../login.php?error=$message");
+        } else {
+            echo $_SESSION['LAST_ACTIVITY'];
+            $_SESSION['LAST_ACTIVITY'] = time();
+        }
+    } else {
+        header("Location: ../login.php?error=$message");
     }
 ?>
