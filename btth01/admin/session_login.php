@@ -7,7 +7,6 @@
             session_destroy();
             header("Location: ../login.php?error=$message");
         } else {
-            echo $_SESSION['LAST_ACTIVITY'];
             $_SESSION['LAST_ACTIVITY'] = time();
         }
     } else {
