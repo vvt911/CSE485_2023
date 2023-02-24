@@ -86,7 +86,7 @@
                     <div class="col-sm-4 col-md-3">
                         <div class="card mb-2" style="width: 100%;">
                             <img src="./images/songs/<?= $row['hinhanh'] ?>" class="card-img-top" alt="...">
-                            <div class="card-body">
+                            <div class="card-body card-body__main">
                                 <h5 class="card-title text-center">
                                     <a href="./detail.php?id=<?= $row['ma_bviet']; ?>" class="text-decoration-none">
                                         <?= $row['ten_bhat']; ?>
