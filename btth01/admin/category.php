@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music for Life</title>
+    <title>Thể loại</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style_login.css">
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
@@ -17,26 +19,26 @@
                     <a class="navbar-brand" href="#">Administration</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="./">Trang chủ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.php">Trang ngoài</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active fw-bold" href="category.php">Thể loại</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="author.php">Tác giả</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="article.php">Bài viết</a>
-                    </li>
-                </ul>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="./">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.php">Trang ngoài</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active fw-bold" href="category.php">Thể loại</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="author.php">Tác giả</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="article.php">Bài viết</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -56,30 +58,42 @@
                             <th>Xóa</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Nhạc trữ tình</td>
-                            <td>
-                                <a href="edit_category.php?id=1"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Nhạc cách mạng</td>
-                            <td>
-                                <a href="edit_category.php?id=2"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                       
-                    </tbody>
+                    <?php
+                    $con = mysqli_connect('localhost', 'root', '', 'btth01_cse485');
+                    if (!$con) {
+                        die('Kết nối tới sever bị lỗi');
+                    }
+                    $sql = "SELECT * FROM theloai";
+                    // $sql1 = "SELECT * from theloai WHERE theloai.ma_tloai = $id_tloai";
+                    $rs = mysqli_query($con, $sql);
+                    // $rs1 = mysqli_query($con, $sql1);
+                    // $category = mysqli_fetch_assoc($rs1);
+                    if (mysqli_num_rows($rs) > 0) {
+                        while ($row = mysqli_fetch_assoc($rs)) {
+
+
+                    ?>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><?php echo $row['ma_tloai']; ?></th>
+                                    <td><?php echo $row['ten_tloai']; ?></td>
+                                    <td>
+                                        <a href="edit_category.php?id=<?php echo $row['ma_tloai'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    </td>
+                                    <td>
+                                        <a href="process_remove_category.php?id=<?php echo $row['ma_tloai'] ?>" onclick="return confirm('Bạn có muốn xóa thể loại không?')">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                    <?php
+                        }
+                    }
+                    ?>
                 </table>
+
             </div>
         </div>
     </main>
@@ -88,4 +102,5 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
+
 </html>
