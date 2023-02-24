@@ -1,4 +1,6 @@
-<?php   
+<?php
+require './session_login.php';
+?><?php   
 $ma_tloai = $_POST['txtIDCat'];
 $theloai = $_POST['txtCatName'];
 $con = mysqli_connect('localhost','root','','btth01_cse485' );

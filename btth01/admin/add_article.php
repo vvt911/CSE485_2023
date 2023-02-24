@@ -1,3 +1,6 @@
+<?php
+require './session_login.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
