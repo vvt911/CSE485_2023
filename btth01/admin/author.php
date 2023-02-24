@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+require './session_login.php';
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -37,6 +39,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="article.php">Bài viết</a>
+                        </li>
+                        <li class="nav-item" style="position:absolute; right:10px;">
+                            <a href="./logout.php" class="nav-link">Logout</a>
                         </li>
                     </ul>
                 </div>

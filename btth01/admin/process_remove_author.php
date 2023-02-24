@@ -1,4 +1,6 @@
 <?php
+require './session_login.php';
+?><?php
 // Kết nối tới database
 $con = mysqli_connect('localhost', 'root', '', 'btth01_cse485');
 
