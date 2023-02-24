@@ -1,6 +1,6 @@
 <?php
 if (isset($_GET['error'])) {
-    echo "<script>aler('".htmlspecialchars($_GET['error'])."');</script>";
+    echo "<script>alert('" . htmlspecialchars($_GET['error']) . "');</script>";
 }
 ?>
 <?php
@@ -22,14 +22,13 @@ if (isset($_POST['btnLogin'])) {
     }
 
     $validate_success = empty($username_error) && empty($password_error);
-    echo var_dump($validate_success);
     if ($validate_success) {
         $conn = mysqli_connect('localhost', 'root', '', 'btth01_cse485');
         $sql = "SELECT * FROM user WHERE ten_dnhap = '$username' AND mat_khau = '$password'";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) > 0) {
-            $_SESSION['KeyLogin'] = $username;
+            $_SESSION['LAST_ACTIVITY'] = time();
             header("Location: ./admin/");
         } else {
             header("Location: login.php?error='Sai tên đăng nhập hoặc mật khẩu'");
@@ -47,7 +46,7 @@ if (isset($_POST['btnLogin'])) {
     <title>Music for Life</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style_login.css">
+    <link rel="stylesheet" href="./css/style_login.css">
 </head>
 
 <body>
@@ -95,12 +94,14 @@ if (isset($_POST['btnLogin'])) {
                     <form action="./login.php" method="POST">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="txtUser"><i class="fas fa-user"></i></span>
-                            <input type="text" class="form-control" name="username" placeholder="username">
+                            <input type="text" class="w-75 form-control <?php echo $username_error ? 'is-invalid' : '' ?>" name="username" placeholder="username">
+                            <p class="text-danger"><?php echo $username_error; ?></p>
                         </div>
 
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="txtPass"><i class="fas fa-key"></i></span>
-                            <input type="password" class="form-control" name="password" placeholder="password">
+                            <input type="password" class="w-75 form-control <?php echo $password_error ? 'is-invalid' : '' ?>" name="password" placeholder="password">
+                            <p class="text-danger"><?php echo $password_error; ?></p>
                         </div>
 
                         <div class="row align-items-center remember">
