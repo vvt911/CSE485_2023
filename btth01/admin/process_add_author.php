@@ -5,12 +5,11 @@ require './session_login.php';
 $con = mysqli_connect('localhost', 'root', '', 'btth01_cse485');
 
 // Lấy dữ liệu từ form
-$ma_tgia = $_POST['txtMaTacGia'];
 $ten_tgia = $_POST['txtTenTacGia'];
 $hinhanh = $_FILES['fileHinhAnh']['name'];
 
 // Kiểm tra các trường dữ liệu
-if ($ma_tgia == "" || $ten_tgia == "") {
+if ($ten_tgia == "") {
     echo "<script>alert('Vui lòng nhập đầy đủ thông tin!');</script>";
     echo "<script>window.location = 'add_author.php'</script>";
     die();
@@ -33,7 +32,7 @@ if ($hinhanh != "") {
 }
 
 // Thêm bài viết vào database
-$sql = "INSERT INTO tacgia (ma_tgia, ten_tgia,hinh_tgia) VALUES ('$ma_tgia ', '$ten_tgia','$hinhanh')";
+$sql = "INSERT INTO tacgia (ten_tgia,hinh_tgia) VALUES ('$ten_tgia','$hinhanh')";
 $result = mysqli_query($con, $sql);
 
 if ($result) {

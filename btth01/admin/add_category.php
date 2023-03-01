@@ -48,10 +48,6 @@ require './session_login.php';
                 <h3 class="text-center text-uppercase fw-bold">Thêm mới thể loại</h3>
                 <form action="process_add_category.php"  method="post" enctype="multipart/form-data">
                     <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblIDCat">Mã thể loại</span>
-                        <input type="text" class="form-control" name="txtIDCat" >
-                    </div>
-                    <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Tên thể loại</span>
                         <input type="text" class="form-control" name="txtCatName" >
                     </div>
@@ -72,12 +68,9 @@ require './session_login.php';
         const form = document.querySelector('form');
         form.addEventListener('submit',(event)=>{
             event.preventDefault();
-            var maTheLoai = document.querySelector('input[name="txtIDCat"]');
+            
             var tenTheLoai = document.querySelector('input[name="txtCatName"]');
-            if (maTheLoai.value.trim() === '') {
-                    alert('Bạn chưa nhập Mã thể loại');
-                    return;
-                }
+            
             if (tenTheLoai.value.trim() === '') {
                     alert('Bạn chưa nhập Tên thể loại');
                     return;

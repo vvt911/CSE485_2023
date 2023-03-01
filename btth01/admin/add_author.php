@@ -50,11 +50,6 @@ require './session_login.php';
                 <h3 class="text-center text-uppercase fw-bold">Thêm tác giả</h3>
                 <form action="process_add_author.php" method="post" enctype="multipart/form-data">
                     <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblMaBaiViet">Mã tác giả</span>
-                        <input type="text" class="form-control" name="txtMaTacGia" require>
-                    </div>
-
-                    <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblTieuDe">Tên Tác giả</span>
                         <input type="text" class="form-control" name="txtTenTacGia">
                     </div>
@@ -82,14 +77,8 @@ require './session_login.php';
             form.addEventListener('submit', (event) => {
                 event.preventDefault(); // Ngăn chặn form submit nếu có lỗi
 
-                var maTacGiaInput = document.querySelector('input[name="txtMaTacGia"]');
                 var tenTacGiaInput = document.querySelector('input[name="txtTenTacGia"]');
                 var hinhAnhInput = document.querySelector('input[name="fileHinhAnh"]');
-
-                if (maTacGiaInput.value.trim() === '') {
-                    alert('Bạn chưa nhập Mã tác giả');
-                    return;
-                }
 
                 if (tenTacGiaInput.value.trim() === '') {
                     alert('Bạn chưa nhập Tên tác giả');

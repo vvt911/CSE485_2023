@@ -5,7 +5,6 @@ require './session_login.php';
 $con = mysqli_connect('localhost', 'root', '', 'btth01_cse485');
 
 // Lấy dữ liệu từ form
-$ma_bviet = $_POST['txtMaBaiViet'];
 $tieude = $_POST['txtTieuDe'];
 $ten_bhat = $_POST['txtTenBaiHat'];
 $ma_tloai = $_POST['sltTheLoai'];
@@ -16,7 +15,7 @@ $hinhanh = $_FILES['fileHinhAnh']['name'];
 $ngayviet = date('Y-m-d H:i:s');
 
 // Kiểm tra các trường dữ liệu
-if ($ma_bviet == "" || $tieude == "" || $ten_bhat == "" || $ma_tloai == "" || $tomtat == "" || $noidung == "" || $ma_tgia == "") {
+if ($tieude == "" || $ten_bhat == "" || $ma_tloai == "" || $tomtat == "" || $noidung == "" || $ma_tgia == "") {
     echo "<script>alert('Vui lòng nhập đầy đủ thông tin!');</script>";
     echo "<script>window.location = 'add_article.php'</script>";
     die();
@@ -39,7 +38,7 @@ if ($hinhanh != "") {
 }
 
 // Thêm bài viết vào database
-$sql = "INSERT INTO baiviet (ma_bviet, tieude, ten_bhat, ma_tloai, tomtat, noidung, ma_tgia, hinhanh, ngayviet) VALUES ('$ma_bviet', '$tieude', '$ten_bhat', '$ma_tloai', '$tomtat', '$noidung', '$ma_tgia', '$hinhanh', '$ngayviet')";
+$sql = "INSERT INTO baiviet (tieude, ten_bhat, ma_tloai, tomtat, noidung, ma_tgia, hinhanh, ngayviet) VALUES ('$tieude', '$ten_bhat', '$ma_tloai', '$tomtat', '$noidung', '$ma_tgia', '$hinhanh', '$ngayviet')";
 $result = mysqli_query($con, $sql);
 
 if ($result) {

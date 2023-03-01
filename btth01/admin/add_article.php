@@ -50,11 +50,6 @@ require './session_login.php';
                 <h3 class="text-center text-uppercase fw-bold">Thêm mới bài viết</h3>
                 <form action="process_add_article.php" method="post" enctype="multipart/form-data">
                     <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblMaBaiViet">Mã bài viết</span>
-                        <input type="text" class="form-control" name="txtMaBaiViet" require>
-                    </div>
-
-                    <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblTieuDe">Tiêu đề</span>
                         <input type="text" class="form-control" name="txtTieuDe">
                     </div>
@@ -150,7 +145,6 @@ require './session_login.php';
             form.addEventListener('submit', (event) => {
                 event.preventDefault(); // Ngăn chặn form submit nếu có lỗi
 
-                var maBaiVietInput = document.querySelector('input[name="txtMaBaiViet"]');
                 var tieuDeInput = document.querySelector('input[name="txtTieuDe"]');
                 var tenBaiHatInput = document.querySelector('input[name="txtTenBaiHat"]');
                 var tomTatInput = document.querySelector('textarea[name="txtTomTat"]');
@@ -158,12 +152,6 @@ require './session_login.php';
                 var tacGiaInput = document.querySelector('select[name="sltTacGia"]');
                 var hinhAnhInput = document.querySelector('input[name="fileHinhAnh"]');
                 console.log(hinhAnhInput);
-
-                // Kiểm tra trường Mã bài viết
-                if (maBaiVietInput.value.trim() === '') {
-                    alert('Bạn chưa nhập Mã bài viết');
-                    return;
-                }
 
                 // Kiểm tra trường Tiêu đề
                 if (tieuDeInput.value.trim() === '') {
